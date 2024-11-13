@@ -68,7 +68,7 @@ export const FORGOT_PASSWORD_API = async (payload) => {
   }
 };
 
-export const GET_INDEXES_BY_ID_API = async ({ symbol }) => {
+export const GET_INDEXES_BY_ID_API = async (symbol) => {
   try {
     const response = await axiosInstance.get(
       `${API_URL?.baseUrl}market/getBySymbolIndex?symbol=${symbol}`

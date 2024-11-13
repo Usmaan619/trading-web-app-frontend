@@ -4672,3 +4672,28 @@ body::-webkit-scrollbar-thumb {
     transform: rotate(360deg);
   }
 }
+
+.indexes-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 25px;
+  min-height: 50px;
+  padding: 10px 65px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  text-align: center;
+}

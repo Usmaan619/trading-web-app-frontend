@@ -18,10 +18,13 @@ import ErrorPage from "./component/pages/404Page/404";
 import Forgot from "./component/pages/forgot/forgot";
 import Privacy from "./component/pages/privacy/privacy";
 import Profile from "./component/pages/profile/profile";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import ScrollToTop from "./component/common/scrollToTop/scroll";
+import { ToastContainer } from "react-toastify";
+import AdminUser from "./component/admin/user";
+
+import { IndexesDetails } from "./component/common/indexes-details/indexes.details";
 
 function App() {
   useEffect(() => {
@@ -50,7 +53,8 @@ function App() {
   }, []);
   return (
     <>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
+      {/* <IndexesDetails symbol={"^NSEI"}/> */}
       <Router>
         <ScrollToTop />
         <Routes>
@@ -73,6 +77,7 @@ function App() {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/detail/:symbol" element={<IndexesDetails />} />
         </Routes>
       </Router>
     </>

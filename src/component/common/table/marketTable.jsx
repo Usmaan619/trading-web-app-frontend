@@ -4,8 +4,8 @@ import { GET_INDEXES_API } from "../../apis/api";
 const MarketTable = () => {
   const [tableData, SetTableData] = useState();
   useEffect(() => {
+    getIndexes();
     const intervalCall = setInterval(() => {
-      getIndexes();
     }, 10000);
     return () => {
       // clean up interval
