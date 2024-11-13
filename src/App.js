@@ -18,13 +18,10 @@ import ErrorPage from "./component/pages/404Page/404";
 import Forgot from "./component/pages/forgot/forgot";
 import Privacy from "./component/pages/privacy/privacy";
 import Profile from "./component/pages/profile/profile";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import ScrollToTop from "./component/common/scrollToTop/scroll";
-import { ToastContainer } from "react-toastify";
-import AdminUser from "./component/admin/user";
-
-import { IndexesDetails } from "./component/common/indexes-details/indexes.details";
 
 function App() {
   useEffect(() => {
@@ -53,8 +50,31 @@ function App() {
   }, []);
   return (
     <>
-      <ToastContainer />
-      <IndexesDetails />
+      {/* <ToastContainer /> */}
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home1" element={<Home1 />} />
+          <Route path="/invest" element={<Invest />} />
+          <Route path="/token" element={<Token />} />
+          <Route path="/affiliate" element={<Affiliate />} />
+          <Route path="/company" element={<Company />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/how" element={<How />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/article" element={<Article />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/contest" element={<Contest />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/errorPage" element={<ErrorPage />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </Router>
     </>
   );
 }
