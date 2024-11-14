@@ -34,7 +34,7 @@ const SignIn = () => {
   const onSubmit = async (data) => {
     try {
       data.role = window?.location?.pathname === "/a/login" ? "Admin" : "";
-      console.log("data: ", data);
+      
 
       setIsLoading(true);
 

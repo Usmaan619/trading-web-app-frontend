@@ -16,9 +16,11 @@ import { useParams } from "react-router-dom";
 
 export const IndexesDetails = () => {
   const { symbol } = useParams();
-  console.log(" symbol:---------------------------- ", symbol);
 
   const [indexesData, setIndexesData] = useState();
+  /**
+   * symbols
+   * */
   // "^NSEI",
   //   "^BSESN",
   //   "^NSEBANK",
@@ -46,48 +48,26 @@ export const IndexesDetails = () => {
     };
   }, []);
 
-  // const intervalCall = setInterval(() => {
-  //   getIndexes();
-  // }, 10000);
-  // return () => {
-  //   // clean up interval
-  //   clearInterval(intervalCall);
-  // };
-
   const singleIndexDetail = async () => {
     try {
       const res = await GET_INDEXES_BY_ID_API(symbol);
-      console.log("res: ", res);
+
       setIndexesData(res?.data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
+    } catch (error) {}
   };
 
-  /** mock data */
-  // const niftyData = {
-  //   fiftyTwoWeekRange: {
-  //     low: 19579.65,
-  //     high: 26277.35,
-  //   },
-  //   fiftyDayAverage: 24963.186,
-  //   twoHundredDayAverage: 23524.457,
-  //   regularMarketPrice: 23716,
-  //   regularMarketChange: -167.44922,
-  //   regularMarketChangePercent: -0.70109665,
-  //   averageDailyVolume3Month: 285598,
-  //   symbol: "^NSEI",
-  // };
   return (
     <React.Fragment>
       {/* section */}
 
-      <section className="section mt-5">
-        <div className="row">
+      <section className="section ">
+        <div className="row mt-5">
           {/* <!-- title --> */}
           <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             <div className="section__title">
-              <h2>{indexesData?.shortName} Details</h2>
+              <h2>
+                {indexesData?.shortName} {indexesData?.quoteType} Details
+              </h2>
               <p>
                 "Secure a unique opportunity to engage in cryptocurrency
                 arbitrage by acquiring arbitrage nodes on our platform."
@@ -101,12 +81,12 @@ export const IndexesDetails = () => {
             <div className="col-12 col-lg-4">
               {/* <!-- invest --> */}
               <div className="invest">
-                <h2 className="invest__title">NIFTY 50 Index</h2>
+                <h2 className="invest__title">{indexesData?.shortName}</h2>
 
                 <ul className="invest__list">
                   <li>
                     <strong>Current Price:</strong>{" "}
-                    {indexesData?.regularMarketPrice} INR
+                    {indexesData?.regularMarketPrice} {indexesData?.currency}
                   </li>
                   <li
                     className={`price-change ${
@@ -157,7 +137,9 @@ export const IndexesDetails = () => {
             <div className="col-12 col-lg-8">
               {/* <!-- invest --> */}
               <div className="invest">
-                <h2 className="invest__title">NIFTY 50 Chart</h2>
+                <h2 className="invest__title">
+                  {indexesData?.shortName} Chart
+                </h2>
 
                 <div className="center">
                   <Nifty50Chart data={indexesData} />
