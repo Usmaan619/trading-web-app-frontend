@@ -90,3 +90,15 @@ export const SEND_OTP_API = async (payload) => {
     throw error?.response;
   }
 };
+
+export const GET_AMFI_FUND_API = async (payload) => {
+  try {
+    const response = await axios.get(
+      `${API_URL?.baseUrl}market/getAMFIFundData`,
+      payload
+    );
+    return response?.data;
+  } catch (error) {
+    throw error?.response;
+  }
+};

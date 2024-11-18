@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo1 from "../../asset/img/partners/logo1.svg";
 import logo2 from "../../asset/img/partners/logo2.svg";
 import logo3 from "../../asset/img/partners/logo3.svg";
@@ -10,7 +10,6 @@ import logo8 from "../../asset/img/partners/logo8.svg";
 
 import graphChart from "../../asset/graph-chart-2-svgrepo-com.svg";
 
-import icic_logo from "../../asset/img/icici_logo.png";
 // import topRated from "../../asset/img/top-rated.svg";
 
 import Heading from "../heading/heading";
@@ -23,6 +22,8 @@ import {
   LinearScale,
   PointElement,
 } from "chart.js";
+import { GET_AMFI_FUND_API } from "../../apis/api";
+import PaginatedList from "./infiniteScroll";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 export default function Funds() {
@@ -126,6 +127,24 @@ export default function Funds() {
       },
     },
   };
+
+  const [AMFIFundData, setAMFIFundData] = useState();
+  console.log("AMFIFundData: ", AMFIFundData);
+
+  useEffect(() => {
+    getAMFIFundData();
+  }, []);
+
+  const getAMFIFundData = async () => {
+    try {
+      const fundsData = await GET_AMFI_FUND_API();
+      console.log("fundsData: ", fundsData);
+      setAMFIFundData(fundsData?.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
   return (
     <React.Fragment>
       <section className="mt-4 section mx-5">
@@ -162,7 +181,7 @@ export default function Funds() {
               ;
             </div>
           </div>
-          <div className="col-4">
+          <div className="col-4 h-75">
             <div className="chart-container">
               <Line data={chartData} options={options} />
             </div>
@@ -170,6 +189,45 @@ export default function Funds() {
         </div>
 
         <section className="">
+              <div className=" ">
+                <div className="row">
+                  {/* <!-- title --> */}
+                  <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+                    <Heading title={`Just Lunched`} />
+                  </div>
+                  {/* <!-- end title --> */}
+                </div>
+
+                <div className="row">
+                  {justLunch.map((j, index) => (
+                    <div className="col-6 col-lg-3" key={index}>
+                      {/* <!-- partner --> */}
+                      <div className="funds-container h-auto p-3">
+                        <div className="d-flex  gap-2">
+                          <img
+                            src={graphChart}
+                            height={35}
+                            width={35}
+                            alt="Loading"
+                          />
+                          <div className="d-grid  text-white fixed-width">
+                            <div className="font-sm text-truncate">
+                              {j?.name}
+                            </div>
+                            <div className="font-xsm text-truncate">
+                              {j?.subName}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <!-- end partner --> */}
+                    </div>
+                  ))}
+                  ;
+                </div>
+              </div>
+            </section>
+        <section className="section">
           <div className=" mt-4">
             <div className="row">
               {/* <!-- title --> */}
@@ -183,88 +241,10 @@ export default function Funds() {
               </div>
               {/* <!-- end title --> */}
             </div>
+          
 
             <div className="row">
-              {PartnerCard.map((link, index) => (
-                <div className="col-6 col-lg-3">
-                  {/* <!-- partner --> */}
-                  <div className="funds-container p-3">
-                    <div className="d-flex align-items-center gap-2">
-                      <img
-                        src={icic_logo}
-                        height={40}
-                        width={30}
-                        alt="Loading"
-                      />
-                      <div className="d-grid mt-1 text-white fixed-width">
-                        <div className="font-sm text-truncate">
-                          ICICI Prudential Nifty Next 50
-                        </div>
-                        <p className="font-xsm text-truncate">
-                          Equity - Large Cap
-                        </p>
-                      </div>
-                    </div>
-                    <hr className="text-bg-white border" />
-                    <div className="d-flex align-items-center gap-2">
-                      <div className="d-grid mt-1 text-white fixed-width">
-                        <div className="font-sm text-truncate">
-                          Min. SIP amount
-                        </div>
-                        <p className="font-xsm text-truncate">₹100</p>
-                      </div>
-                      <div className="d-grid mt-1 text-white fixed-width text-center">
-                        <div className="font-sm text-truncate">Rating</div>
-                        <p className="font-xsm text-truncate">4*</p>
-                      </div>
-
-                      <div className="d-grid mt-1 text-white fixed-width">
-                        <div className="font-sm text-truncate">return</div>
-                        <p className="font-xsm text-truncate">+15.19%</p>
-                      </div>
-                    </div>
-                  </div>
-                  {/* <!-- end partner --> */}
-                </div>
-              ))}
-              ;
-            </div>
-          </div>
-        </section>
-        <section className="section">
-          <div className=" ">
-            <div className="row">
-              {/* <!-- title --> */}
-              <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
-                <Heading title={`Just Lunched`} />
-              </div>
-              {/* <!-- end title --> */}
-            </div>
-
-            <div className="row">
-              {justLunch.map((j, index) => (
-                <div className="col-6 col-lg-3" key={index}>
-                  {/* <!-- partner --> */}
-                  <div className="funds-container h-auto p-3">
-                    <div className="d-flex  gap-2">
-                      <img
-                        src={graphChart}
-                        height={35}
-                        width={35}
-                        alt="Loading"
-                      />
-                      <div className="d-grid  text-white fixed-width">
-                        <div className="font-sm text-truncate">{j?.name}</div>
-                        <div className="font-xsm text-truncate">
-                          {j?.subName}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* <!-- end partner --> */}
-                </div>
-              ))}
-              ;
+              <PaginatedList data={AMFIFundData} />
             </div>
           </div>
         </section>
