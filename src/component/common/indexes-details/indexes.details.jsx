@@ -171,7 +171,7 @@ export const IndexesDetails = () => {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-const Nifty50Chart = ({ data }) => {
+export const Nifty50Chart = ({ data }) => {
   // Extracting necessary data for the chart
   const fiftyTwoWeekLow = data?.fiftyTwoWeekRange.low;
   const fiftyTwoWeekHigh = data?.fiftyTwoWeekRange.high;

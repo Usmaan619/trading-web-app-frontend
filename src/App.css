@@ -4697,3 +4697,43 @@ body::-webkit-scrollbar-thumb {
   font-weight: 400;
   text-align: center;
 }
+
+.funds-container {
+  /* display: flex; */
+
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 180px;
+  position: relative;
+  margin-top: 24px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.font-xsm {
+  font-size: 12px;
+}
+
+.font-sm {
+  font-size: 14px;
+}
+
+.font-lg {
+  font-size: 18px;
+}
+.font-md {
+  font-size: 16px;
+}
+
+.fixed-width {
+  width: 184px;
+}

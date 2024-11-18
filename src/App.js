@@ -25,6 +25,7 @@ import { ToastContainer } from "react-toastify";
 import AdminUser from "./component/admin/user";
 
 import { IndexesDetails } from "./component/common/indexes-details/indexes.details";
+import Funds from "./component/common/funds/funds";
 
 function App() {
   useEffect(() => {
@@ -77,6 +78,8 @@ function App() {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/profile" element={<Profile />} />
+          {/* new */}
+          <Route path="/funds" element={<Funds />} />
           <Route path="/detail/:symbol" element={<IndexesDetails />} />
         </Routes>
       </Router>
