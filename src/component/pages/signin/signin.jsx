@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../asset/img/logo.svg";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FORGOT_PASSWORD_API, LOGIN_API } from "../../apis/api";
@@ -26,9 +26,7 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm();
 
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async (data) => {
@@ -82,7 +80,6 @@ const SignIn = () => {
   };
 
   const [title, setTitle] = useState();
-
   useEffect(() => {
     window?.location?.pathname === "/a/login"
       ? setTitle("Admin Sign In")

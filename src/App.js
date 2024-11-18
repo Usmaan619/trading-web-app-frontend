@@ -22,6 +22,8 @@ import Profile from "./component/pages/profile/profile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import ScrollToTop from "./component/common/scrollToTop/scroll";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   useEffect(() => {
@@ -50,7 +52,7 @@ function App() {
   }, []);
   return (
     <>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       <Router>
         <ScrollToTop />
         <Routes>
@@ -61,7 +63,7 @@ function App() {
           <Route path="/affiliate" element={<Affiliate />} />
           <Route path="/company" element={<Company />} />
           <Route path="/news" element={<News />} />
-          <Route path="/how" element={<How />} />
+          /<Route path="/how" element={<How />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/article" element={<Article />} />
           <Route path="/contact" element={<Contact />} />

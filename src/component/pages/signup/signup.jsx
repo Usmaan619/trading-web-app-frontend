@@ -52,7 +52,8 @@ const SignUp = () => {
 
       console.log(data);
     } catch (e) {
-      toastError(e?.data?.message);
+      console.log("", e);
+      toastError("");
       setLoading(false);
     } finally {
       setLoading(false);

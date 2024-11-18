@@ -78,3 +78,15 @@ export const GET_INDEXES_BY_ID_API = async ({ symbol }) => {
     throw error;
   }
 };
+
+export const SEND_OTP_API = async (payload) => {
+  try {
+    const response = await axios.post(
+      `${API_URL?.baseUrl}user/sendotp`,
+      payload
+    );
+    return response?.data;
+  } catch (error) {
+    throw error?.response;
+  }
+};
