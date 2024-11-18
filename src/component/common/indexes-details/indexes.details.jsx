@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -8,89 +8,175 @@ import {
   PointElement,
 } from "chart.js";
 import "../../common/indexes-details/indexes.details.css";
+import { GET_INDEXES_BY_ID_API } from "../../apis/api";
+// import graph1 from "../../asset/img/graph/graph1.svg";
+// import graph2 from "../../asset/img/graph/graph2.svg";
+// import Heading from "../heading/heading";
+import { useParams } from "react-router-dom";
 
-export const IndexesDetails = ({ symbol }) => {
-  const singleIndexDetail = () => {
+export const IndexesDetails = () => {
+  const { symbol } = useParams();
+
+  const [indexesData, setIndexesData] = useState();
+  /**
+   * symbols
+   * */
+  // "^NSEI",
+  //   "^BSESN",
+  //   "^NSEBANK",
+  //   "^DJI",
+  //   "^IXIC",
+  //   "NASDAQ:AAPL",
+  //   "BTC-USD",
+  //   "ETH-USD",
+  //   "SOL-USD",
+  //   "BNB-USD",
+  //   "GC=F",
+  //   "SI=F",
+  //   "HG=F",
+  //   "CL=F",
+  //   "NG=F",
+
+  useEffect(() => {
+    if (symbol) singleIndexDetail();
+    const intervalCall = setInterval(() => {
+      singleIndexDetail();
+    }, 10000);
+
+    return () => {
+      clearInterval(intervalCall);
+    };
+  }, []);
+
+  const singleIndexDetail = async () => {
     try {
-      
+      const res = await GET_INDEXES_BY_ID_API(symbol);
 
-      
-    } catch (error) {
-      console.log('error: ', error);
-      
-    }
+      setIndexesData(res?.data);
+    } catch (error) {}
   };
 
-  /** mock data */
-  const niftyData = {
-    fiftyTwoWeekRange: {
-      low: 19579.65,
-      high: 26277.35,
-    },
-    fiftyDayAverage: 24963.186,
-    twoHundredDayAverage: 23524.457,
-    regularMarketPrice: 23716,
-    regularMarketChange: -167.44922,
-    regularMarketChangePercent: -0.70109665,
-    averageDailyVolume3Month: 285598,
-    symbol: "^NSEI",
-  };
   return (
-    <div className="container">
-      <div className="content">
-        {/* Left Side - Basic Data */}
-        <div className="left-side">
-          <h2>NIFTY 50 Index</h2>
-          <p>
-            <strong>Current Price:</strong> {niftyData.regularMarketPrice} INR
-          </p>
-          <p
-            className={`price-change ${
-              niftyData.regularMarketChange < 0 ? "negative" : "positive"
-            }`}
-          >
-            <strong>Change:</strong> {niftyData.regularMarketChange} (
-            {(niftyData.regularMarketChangePercent * 100).toFixed(2)}%)
-          </p>
-          <p>
-            <strong>52-Week Low:</strong> {niftyData.fiftyTwoWeekRange.low}
-          </p>
-          <p>
-            <strong>52-Week High:</strong> {niftyData.fiftyTwoWeekRange.high}
-          </p>
-        </div>
+    <React.Fragment>
+      {/* section */}
 
-        {/* Center - Chart */}
-        <div className="center">
-          <Nifty50Chart data={niftyData} />
+      <section className="section ">
+        <div className="row mt-5">
+          {/* <!-- title --> */}
+          <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+            <div className="section__title">
+              <h2>
+                {indexesData?.shortName} {indexesData?.quoteType} Details
+              </h2>
+              <p>
+                "Secure a unique opportunity to engage in cryptocurrency
+                arbitrage by acquiring arbitrage nodes on our platform."
+              </p>
+            </div>
+          </div>
+          {/* <!-- end title --> */}
         </div>
+        <div className="container">
+          <div className="row row--relative">
+            <div className="col-12 col-lg-4">
+              {/* <!-- invest --> */}
+              <div className="invest">
+                <h2 className="invest__title">{indexesData?.shortName}</h2>
 
-        {/* Right Side - Additional Details */}
-        <div className="right-side">
-          <p>
-            <strong>50-Day Average:</strong> {niftyData.fiftyDayAverage}
-          </p>
-          <p>
-            <strong>200-Day Average:</strong> {niftyData.twoHundredDayAverage}
-          </p>
-          <p>
-            <strong>Average Volume (3M):</strong>{" "}
-            {niftyData.averageDailyVolume3Month}
-          </p>
+                <ul className="invest__list">
+                  <li>
+                    <strong>Current Price:</strong>{" "}
+                    {indexesData?.regularMarketPrice} {indexesData?.currency}
+                  </li>
+                  <li
+                    className={`price-change ${
+                      indexesData?.regularMarketChange < 0
+                        ? "negative"
+                        : "positive"
+                    }`}
+                  >
+                    <strong>Change:</strong> {indexesData?.regularMarketChange}{" "}
+                    (
+                    {(indexesData?.regularMarketChangePercent * 100).toFixed(2)}
+                    %)
+                  </li>
+                  <li>
+                    <strong>52-Week Low:</strong>{" "}
+                    {indexesData?.fiftyTwoWeekRange.low}
+                  </li>
+                  <li>
+                    <strong>52-Week High:</strong>{" "}
+                    {indexesData?.fiftyTwoWeekRange.high}
+                  </li>
+
+                  <li>
+                    <strong>50-Day Average:</strong>{" "}
+                    {indexesData?.fiftyDayAverage}
+                  </li>
+                  <li>
+                    <strong>200-Day Average:</strong>{" "}
+                    {indexesData?.twoHundredDayAverage}
+                  </li>
+                  <li>
+                    <strong>Average Volume (3M):</strong>{" "}
+                    {indexesData?.averageDailyVolume3Month}
+                  </li>
+                </ul>
+
+                {/* <!-- design elements --> */}
+                <span className="block-icon block-icon--orange">
+                  <i className="ti ti-database-dollar"></i>
+                </span>
+                <span className="screw screw--lines-bl"></span>
+                <span className="screw screw--lines-br"></span>
+                <span className="screw screw--lines-tr"></span>
+              </div>
+              {/* <!-- end invest --> */}
+            </div>
+
+            <div className="col-12 col-lg-8">
+              {/* <!-- invest --> */}
+              <div className="invest">
+                <h2 className="invest__title">
+                  {indexesData?.shortName} Chart
+                </h2>
+
+                <div className="center">
+                  <Nifty50Chart data={indexesData} />
+                </div>
+                {/* <div className="invest__link">More about token</div> */}
+
+                {/* <!-- design elements --> */}
+                <span className="block-icon block-icon--blue">
+                  <i className="ti ti-brand-coinbase"></i>
+                </span>
+                <span className="screw screw--lines-bl"></span>
+                <span className="screw screw--lines-br"></span>
+                <span className="screw screw--lines-tr"></span>
+              </div>
+              {/* <!-- end invest --> */}
+            </div>
+
+            {/* <!-- animation background --> */}
+            <div
+              className="section__canvas section__canvas--first gradient-background gradient-background"
+              id="canvas"
+            ></div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </React.Fragment>
   );
 };
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-const Nifty50Chart = ({ data }) => {
+export const Nifty50Chart = ({ data }) => {
   // Extracting necessary data for the chart
-  const fiftyTwoWeekLow = data.fiftyTwoWeekRange.low;
-  const fiftyTwoWeekHigh = data.fiftyTwoWeekRange.high;
-  const fiftyDayAverage = data.fiftyDayAverage;
-  const twoHundredDayAverage = data.twoHundredDayAverage;
+  const fiftyTwoWeekLow = data?.fiftyTwoWeekRange.low;
+  const fiftyTwoWeekHigh = data?.fiftyTwoWeekRange.high;
+  const fiftyDayAverage = data?.fiftyDayAverage;
+  const twoHundredDayAverage = data?.twoHundredDayAverage;
 
   // Dummy data for demonstration (replace with actual historical data if available)
   const labels = ["52-Week Low", "50-Day Avg", "200-Day Avg", "52-Week High"];
@@ -110,31 +196,40 @@ const Nifty50Chart = ({ data }) => {
         data: values,
         fill: false,
         borderColor: "rgba(75,192,192,1)",
-        backgroundColor: "rgba(75,192,192,0.2)",
+        backgroundColor: "rgba(255,255,255,1)",
         tension: 0.1,
       },
     ],
   };
 
+  // Chart options with white label colors
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        display: true,
+        labels: {
+          color: "white", // Legend label color
+        },
+      },
+      tooltip: {
+        enabled: true,
       },
     },
     scales: {
-      y: {
-        beginAtZero: false,
-        title: {
-          display: true,
-          text: "Price (INR)",
+      x: {
+        ticks: {
+          color: "white", // X-axis labels color
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)", // X-axis grid color
         },
       },
-      x: {
-        title: {
-          display: true,
-          text: "Time Period",
+      y: {
+        ticks: {
+          color: "white", // Y-axis labels color
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)", // Y-axis grid color
         },
       },
     },

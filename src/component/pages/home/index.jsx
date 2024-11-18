@@ -24,12 +24,11 @@ import graph1 from "../../asset/img/graph/graph1.svg";
 import graph2 from "../../asset/img/graph/graph2.svg";
 import { NavLink } from "react-router-dom";
 import Faq from "../../common/faq/faq";
-import { GET_INDEXES_API } from "../../apis/api";
 import MarketTable from "../../common/table/marketTable";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 const Home = () => {
-  
-
   const FeatureCardData = [
     {
       title: "Safety",
@@ -285,6 +284,60 @@ const Home = () => {
 
             {/* <!-- deals table --> */}
             <div className="col-12">
+              <SimpleBar className="d-flex gap-2">
+                <div className="d-flex gap-2 mb-3">
+                  <NavLink className={"indexes-container"} to={`/detail/^NSEI`}>
+                    NIFTY 50
+                  </NavLink>
+                  <NavLink
+                    className={"indexes-container"}
+                    to={`/detail/^BSESN`}
+                  >
+                    SENSEX
+                  </NavLink>
+                  <NavLink
+                    className={"indexes-container"}
+                    to={`/detail/^NSEBANK`}
+                  >
+                    NIFTY BANK
+                  </NavLink>
+                  <NavLink className={"indexes-container"} to={`/detail/^DJI`}>
+                    Dow Jones
+                  </NavLink>
+                  <NavLink to={`/detail/^IXIC`} className="indexes-container">
+                    NASDAQ
+                  </NavLink>
+
+                  <NavLink to={`/detail/BTC-USD`} className="indexes-container">
+                    Bitcoin
+                  </NavLink>
+                  <NavLink to={`/detail/ETH-USD`} className="indexes-container">
+                    Ethereum
+                  </NavLink>
+                  <NavLink to={`/detail/SOL-USD`} className="indexes-container">
+                    Solana
+                  </NavLink>
+                  <NavLink to={`/detail/BNB-USD`} className="indexes-container">
+                    BNB
+                  </NavLink>
+                  <NavLink to={`/detail/GC=F`} className="indexes-container">
+                    Gold
+                  </NavLink>
+                  <NavLink to={`/detail/SI=F`} className="indexes-container">
+                    Silver
+                  </NavLink>
+                  <NavLink to={`/detail/HG=F`} className="indexes-container">
+                    Copper
+                  </NavLink>
+                  <NavLink to={`/detail/CL=F`} className="indexes-container">
+                    Crude
+                  </NavLink>
+                  <NavLink to={`/detail/NG=F`} className="indexes-container">
+                    Natural Gas
+                  </NavLink>
+                </div>
+              </SimpleBar>
+
               <MarketTable />
             </div>
             {/* <!-- End deals table --> */}

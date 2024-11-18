@@ -1,11 +1,4 @@
-.container {
-  font-family: Arial, sans-serif;
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-  color: #333;
-  padding: 20px;
-}
+
 
 .content {
   display: flex;
@@ -22,10 +15,10 @@
 }
 
 .center {
-  width: 50%;
-  padding: 15px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  width: 100%;
+  padding: 10px;
+  /* background-color: #fff; */
+  /* border: 1px solid #ddd; */
   border-radius: 8px;
 }
 

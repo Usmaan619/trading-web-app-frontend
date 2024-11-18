@@ -4,6 +4,7 @@ import { GET_INDEXES_API } from "../../apis/api";
 const MarketTable = () => {
   const [tableData, SetTableData] = useState();
   useEffect(() => {
+    getIndexes();
     const intervalCall = setInterval(() => {
       getIndexes();
     }, 10000);
@@ -17,9 +18,7 @@ const MarketTable = () => {
     try {
       const res = await GET_INDEXES_API();
       SetTableData(res?.data);
-    } catch (error) {
-      console.log("error:GET_INDEXES_API ", error);
-    }
+    } catch (error) {}
   };
   return (
     <div className="col-12">
@@ -42,7 +41,9 @@ const MarketTable = () => {
               {tableData?.map((item, index) => (
                 <tr key={index}>
                   <td>
-                    <div className="deals__text alert-success">{item?.shortName}</div>
+                    <div className="deals__text alert-success">
+                      {item?.shortName}
+                    </div>
                   </td>
                   <td>
                     <div className="deals__text">
