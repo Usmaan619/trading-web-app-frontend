@@ -12,12 +12,24 @@ import { toastError, toastSuccess } from "../../../services/toastr.service";
 const schema = yup.object().shape({
   email: yup
     .string()
-    .email("Invalid email format")
+    .trim() // Removes unnecessary spaces
+    .email("Enter a valid email address (e.g., user@example.com)") // Example format for clarity
+    .matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      "Email must be in a proper format and not contain spaces"
+    ) // Ensures no spaces or invalid characters
     .required("Email is required"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(/[a-z]/, "Password must include at least one lowercase letter")
+    .matches(/[A-Z]/, "Password must include at least one uppercase letter")
+    .matches(/\d/, "Password must include at least one number")
+    .matches(
+      /[!@#$%^&*()\-_"=+{}; :,<.>]/,
+      "Password must include at least one special character"
+    ),
 });
 
 const SignIn = () => {
@@ -32,7 +44,6 @@ const SignIn = () => {
   const onSubmit = async (data) => {
     try {
       data.role = window?.location?.pathname === "/a/login" ? "Admin" : "";
-      
 
       setIsLoading(true);
 
