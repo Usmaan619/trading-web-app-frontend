@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import logo1 from "../../asset/img/partners/logo1.svg";
 import logo2 from "../../asset/img/partners/logo2.svg";
 import logo3 from "../../asset/img/partners/logo3.svg";
@@ -27,16 +27,6 @@ import PaginatedList from "./infiniteScroll";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 export default function Funds() {
-  const PartnerCard = [
-    { img: logo1 },
-    { img: logo2 },
-    { img: logo3 },
-    { img: logo4 },
-    { img: logo5 },
-    { img: logo6 },
-    { img: logo7 },
-    { img: logo8 },
-  ];
   const justLunch = [
     { name: "Calculate SIP", subName: "returns", img: "" },
     { name: "New Fund", subName: "Offer (NFO)", img: "" },
@@ -129,7 +119,6 @@ export default function Funds() {
   };
 
   const [AMFIFundData, setAMFIFundData] = useState();
-  console.log("AMFIFundData: ", AMFIFundData);
 
   useEffect(() => {
     getAMFIFundData();
@@ -138,12 +127,13 @@ export default function Funds() {
   const getAMFIFundData = async () => {
     try {
       const fundsData = await GET_AMFI_FUND_API();
-      console.log("fundsData: ", fundsData);
+
       setAMFIFundData(fundsData?.data);
-    } catch (error) {
-      console.log("error: ", error);
-    }
+    } catch (error) {}
   };
+
+  // Memoizing the data
+  const memoizedAMFIFundData = useMemo(() => AMFIFundData, [AMFIFundData]);
 
   return (
     <React.Fragment>
@@ -156,9 +146,9 @@ export default function Funds() {
             </div>
             {/* <!-- end title --> */}
           </div>
-          <div className="col-8">
+          <div className="col-8 ">
             <div className="row">
-              {topRatedFilter.map((t, index) => (
+              {topRatedFilter?.map((t, index) => (
                 <div className="col-6 col-lg-3" key={index}>
                   {/* <!-- partner --> */}
                   <div className="funds-container h-auto p-3">
@@ -189,49 +179,47 @@ export default function Funds() {
         </div>
 
         <section className="">
-              <div className=" ">
-                <div className="row">
-                  {/* <!-- title --> */}
-                  <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
-                    <Heading title={`Just Lunched`} />
-                  </div>
-                  {/* <!-- end title --> */}
-                </div>
+          <div className=" ">
+            <div className="row">
+              {/* <!-- title --> */}
+              <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+                <Heading title={`Just Lunched`} />
+              </div>
+              {/* <!-- end title --> */}
+            </div>
 
-                <div className="row">
-                  {justLunch.map((j, index) => (
-                    <div className="col-6 col-lg-3" key={index}>
-                      {/* <!-- partner --> */}
-                      <div className="funds-container h-auto p-3">
-                        <div className="d-flex  gap-2">
-                          <img
-                            src={graphChart}
-                            height={35}
-                            width={35}
-                            alt="Loading"
-                          />
-                          <div className="d-grid  text-white fixed-width">
-                            <div className="font-sm text-truncate">
-                              {j?.name}
-                            </div>
-                            <div className="font-xsm text-truncate">
-                              {j?.subName}
-                            </div>
-                          </div>
+            <div className="row">
+              {justLunch?.map((j, index) => (
+                <div className="col-6 col-lg-3" key={index}>
+                  {/* <!-- partner --> */}
+                  <div className="funds-container h-auto p-3">
+                    <div className="d-flex  gap-2">
+                      <img
+                        src={graphChart}
+                        height={35}
+                        width={35}
+                        alt="Loading"
+                      />
+                      <div className="d-grid  text-white fixed-width">
+                        <div className="font-sm text-truncate">{j?.name}</div>
+                        <div className="font-xsm text-truncate">
+                          {j?.subName}
                         </div>
                       </div>
-                      {/* <!-- end partner --> */}
                     </div>
-                  ))}
-                  ;
+                  </div>
+                  {/* <!-- end partner --> */}
                 </div>
-              </div>
-            </section>
+              ))}
+              ;
+            </div>
+          </div>
+        </section>
         <section className="section">
           <div className=" mt-4">
             <div className="row">
               {/* <!-- title --> */}
-              <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+              <div className=" col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
                 <Heading
                   title={`Top performing funds`}
                   heading="We take pride in collaborating with our partners who help us
@@ -241,10 +229,9 @@ export default function Funds() {
               </div>
               {/* <!-- end title --> */}
             </div>
-          
 
             <div className="row">
-              <PaginatedList data={AMFIFundData} />
+              <PaginatedList data={memoizedAMFIFundData} />
             </div>
           </div>
         </section>

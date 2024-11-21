@@ -4739,3 +4739,13 @@ body::-webkit-scrollbar-thumb {
 .fixed-width {
   width: 184px;
 }
+
+.input-text::placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  color: #fff;
+}
+
+.border-input {
+  border: 1px solid #322e60;
+}

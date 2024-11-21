@@ -27,6 +27,7 @@ import AdminUser from "./component/admin/user";
 import { IndexesDetails } from "./component/common/indexes-details/indexes.details";
 import Funds from "./component/common/funds/funds";
 import "react-toastify/dist/ReactToastify.css";
+import FundsDetails from "./component/common/funds-details/funds-details";
 
 function App() {
   useEffect(() => {
@@ -66,7 +67,7 @@ function App() {
           <Route path="/affiliate" element={<Affiliate />} />
           <Route path="/company" element={<Company />} />
           <Route path="/news" element={<News />} />
-          /<Route path="/how" element={<How />} />
+          <Route path="/how" element={<How />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/article" element={<Article />} />
           <Route path="/contact" element={<Contact />} />
@@ -81,6 +82,7 @@ function App() {
           {/* new */}
           <Route path="/funds" element={<Funds />} />
           <Route path="/detail/:symbol" element={<IndexesDetails />} />
+          <Route path="/fund-details" element={<FundsDetails />} />
         </Routes>
       </Router>
     </>
