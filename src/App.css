@@ -4736,6 +4736,10 @@ body::-webkit-scrollbar-thumb {
   font-size: 16px;
 }
 
+.font-xl {
+  font-size: 28px;
+}
+
 .fixed-width {
   width: 184px;
 }

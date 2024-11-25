@@ -20,6 +20,7 @@ import Image9 from "../../asset/img/exchanges/kucoin.png";
 import Image10 from "../../asset/img/exchanges/okx.png";
 import Image11 from "../../asset/img/exchanges/upbit.png";
 import MarketTable from "../../common/table/marketTable";
+import moment from "moment/moment";
 const Reports = () => {
   const TableData = [
     {
@@ -168,6 +169,32 @@ const Reports = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  const GOLD_DATA = [
+    {
+      mainTitle: "GOLD MCX",
+      mainPrice: "111,000.00",
+      buyPoint: "Buy 5.00",
+      sellPoint: "Sell 300",
+      openSl: "77298",
+      closeTp: "77520",
+      comm: "-3864.90",
+      Tkt: "33539220",
+      date: moment().format("MM-DD-YY, h:mm:ss a"),
+    },
+    {
+      mainTitle: "GOLD MCX",
+      mainPrice: "111,000.00",
+      buyPoint: "Buy 5.00",
+      sellPoint: "Sell 300",
+      openSl: "77298",
+      closeTp: "77520",
+      comm: "-3864.90",
+      Tkt: "33539220",
+      date: moment().format("MM-DD-YY, h:mm:ss a"),
+    },
+  ];
+
   return (
     <>
       {/* Header Start */}
@@ -193,18 +220,79 @@ const Reports = () => {
       <Card />
       {/* Statics End */}
 
-      {/* <!-- deals --> */}
-      <div class="section">
-        <div class="container">
-          <div class="row">
-            {/* <!-- deals table --> */}
-            <div className="col-12">
-            <MarketTable />
-            </div>
-            {/* <!-- End deals table --> */}
+      {/* Reports start */}
+      <section className="section">
+        {GOLD_DATA?.map((g, idx) => (
+          <div className="container mt-5">
+            <div className="row row--relative">
+              <div className="col-12">
+                <div className="company">
+                  <div className="d-flex justify-content-between w-100">
+                    <h6 className="company__title font-xl">
+                      {g?.mainTitle} <span>{g?.buyPoint} </span>
+                    </h6>
+                    <h6 className="company__title font-xl">{g?.mainPrice}</h6>
+                  </div>
 
-            {/* <!-- paginator --> */}
-            <div class="col-12">
+                  <div className="row w-100 align-items-center">
+                    <p className="company__text">Date: {g?.date}</p>
+                    <div className="col-6 ">
+                      <div className="d-flex justify-content-between w-100">
+                        <div>
+                          <p className="company__text">Open/ SL:</p>
+                          <p className="company__text">Close/ TP:</p>
+                        </div>
+                        <div>
+                          <p className="company__text">77298</p>
+                          <p className="company__text">77520</p>
+                        </div>
+                      </div>
+                    </div>
+                    {/* offset-xl-1
+                  offset-xl-1 */}
+                    <div className="col-1 ">
+                      <p className="company__text">Comm:</p>
+                      <p className="company__text">Tkt#:</p>
+                    </div>
+                    <div className="col-5 text-end">
+                      <p className="company__text">-3864.90</p>
+                      <p className="company__text">33539220</p>
+                    </div>
+                  </div>
+
+                  {/* <!-- design elements --> */}
+                  <span className="block-icon block-icon--orange">
+                    <i className="ti ti-certificate-2"></i>
+                  </span>
+                  <span className="screw screw--lines-bl"></span>
+                  <span className="screw screw--lines-br"></span>
+                  <span className="screw screw--lines-tr"></span>
+                </div>
+              </div>
+
+              {/* <!-- animation background --> */}
+              <div
+                className="section__canvas section__canvas--second gradient-background"
+                id="canvas2"
+              ></div>
+            </div>
+          </div>
+        ))}
+      </section>
+      {/* Reports start */}
+
+      {/* <!-- deals --> */}
+      {/* <div class="section">
+        <div class="container">
+          <div class="row"> */}
+      {/* <!-- deals table --> */}
+      {/* <div className="col-12">
+              <MarketTable />
+            </div> */}
+      {/* <!-- End deals table --> */}
+
+      {/* <!-- paginator --> */}
+      {/* <div class="col-12">
               <div class="paginator">
                 <span class="paginator__pages">10 from 183</span>
 
@@ -237,8 +325,11 @@ const Reports = () => {
 
                 <ul class="paginator__list">
                   <li>
-                    <div className="a" onClick={() => handlePageChange(currentPage - 1)}
-                      disabled={currentPage === 1}>
+                    <div
+                      className="a"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                    >
                       <i class="ti ti-arrow-left"></i>
                     </div>
                   </li>
@@ -257,20 +348,21 @@ const Reports = () => {
                     </li>
                   ))}
                   <li>
-                    <div className="a" onClick={() => handlePageChange(currentPage + 1)}
-                      disabled={indexOfLastItem >= TableData.length}>
-                      <i class="ti ti-arrow-right">
-                      
-                      </i>
+                    <div
+                      className="a"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={indexOfLastItem >= TableData.length}
+                    >
+                      <i class="ti ti-arrow-right"></i>
                     </div>
                   </li>
                 </ul>
               </div>
-            </div>
-            {/* <!-- end paginator --> */}
-          </div>
+            </div> */}
+      {/* <!-- end paginator --> */}
+      {/* </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <!--end deals --> */}
 
