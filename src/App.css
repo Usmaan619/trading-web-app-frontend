@@ -4753,3 +4753,8 @@ body::-webkit-scrollbar-thumb {
 .border-input {
   border: 1px solid #322e60;
 }
+
+
+.tables-border{
+  border-collapse: collapse !important;
+}

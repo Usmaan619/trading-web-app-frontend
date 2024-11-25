@@ -21,6 +21,10 @@ import Image10 from "../../asset/img/exchanges/okx.png";
 import Image11 from "../../asset/img/exchanges/upbit.png";
 import MarketTable from "../../common/table/marketTable";
 import moment from "moment/moment";
+import PdfGenerator from "../../pdf-downloder/PDF-downloder";
+
+import kotakLogo from "../../asset/img/kotak-logo.png";
+
 const Reports = () => {
   const TableData = [
     {
@@ -184,11 +188,11 @@ const Reports = () => {
     },
     {
       mainTitle: "GOLD MCX",
-      mainPrice: "111,000.00",
+      mainPrice: "115,500.00",
       buyPoint: "Buy 5.00",
       sellPoint: "Sell 300",
-      openSl: "77298",
-      closeTp: "77520",
+      openSl: "77175",
+      closeTp: "77406",
       comm: "-3864.90",
       Tkt: "33539220",
       date: moment().format("MM-DD-YY, h:mm:ss a"),
@@ -279,8 +283,55 @@ const Reports = () => {
           </div>
         ))}
       </section>
-      {/* Reports start */}
 
+      {/* Reports start */}
+      <PdfGenerator>
+        <section className="container bg-white p-2">
+          {/* {GOLD_DATA?.map((g, idx) => ( */}
+
+          <div className="mainTitle text-center mt-2">
+            Table table-bordered border-primary
+          </div>
+
+          <div className="d-flex justify-content-between w-100 px-3 my-2 ">
+            <div className="title-container">
+              <div className="">#</div>
+              <div className="">First</div>
+              <div className="">Last</div>
+              <div className="">Handle</div>
+            </div>
+            <div className="logo">
+              <img height={"80px"} src={kotakLogo} />
+            </div>
+          </div>
+
+          <div className="ps-2 fw-bold mt-3">Display asper exchange:</div>
+          <table class="table table-bordered border-dark ">
+            <thead>
+              <tr>
+                <th className="border-2 table-bordered">Trade</th>
+                <th className="border-2 table-bordered">Open/SL</th>
+                <th className="border-2 table-bordered">Close/TP </th>
+                <th className="border-2 table-bordered">Margin</th>
+                <th className="border-2 table-bordered">Comm.</th>
+                <th className="border-2 table-bordered">Tkt#:</th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {GOLD_DATA?.map((g, idx) => (
+                <tr>
+                  <th className="border-2 table-bordered">{g?.mainTitle}</th>
+                  <td className="border-2 table-bordered">{g?.openSl}</td>
+                  <td className="border-2 table-bordered">{g?.closeTp}</td>
+                  <td className="border-2 table-bordered">{g?.mainPrice}</td>
+                  <td className="border-2 table-bordered">{g?.comm}</td>
+                  <td className="border-2 table-bordered">{g?.Tkt}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      </PdfGenerator>
       {/* <!-- deals --> */}
       {/* <div class="section">
         <div class="container">
