@@ -197,6 +197,59 @@ const Reports = () => {
       Tkt: "33539220",
       date: moment().format("MM-DD-YY, h:mm:ss a"),
     },
+    {
+      mainTitle: "GOLD MCX",
+      mainPrice: "111,000.00",
+      buyPoint: "Buy 5.00",
+      sellPoint: "Sell 300",
+      openSl: "77298",
+      closeTp: "77520",
+      comm: "-3864.90",
+      Tkt: "33539220",
+      date: moment().format("MM-DD-YY, h:mm:ss a"),
+    },
+    {
+      mainTitle: "GOLD MCX",
+      mainPrice: "115,500.00",
+      buyPoint: "Buy 5.00",
+      sellPoint: "Sell 300",
+      openSl: "77175",
+      closeTp: "77406",
+      comm: "-3864.90",
+      Tkt: "33539220",
+      date: moment().format("MM-DD-YY, h:mm:ss a"),
+    },
+  ];
+
+  const positions = [
+    {
+      id: 1,
+      script: "BANKNIFTY Nov",
+      action: "Sell 300.00",
+      open: "52149.60",
+      close: "51987.80",
+      profitLoss: "-2346.74",
+      profitLossStyle: "loss",
+    },
+
+    {
+      id: 3,
+      script: "NIFTY Nov",
+      action: "Buy 500.00",
+      open: "23495.20",
+      close: "23565.00",
+      profitLoss: "28,800.00",
+      profitLossStyle: "profit",
+    },
+    {
+      id: 4,
+      script: "COPPER MCX Dec",
+      action: "Buy 4.00",
+      open: "827.30",
+      close: "819.80",
+      profitLoss: "-75,000.00",
+      profitLossStyle: "loss",
+    },
   ];
 
   return (
@@ -225,63 +278,58 @@ const Reports = () => {
       {/* Statics End */}
 
       {/* Reports start */}
-      <section className="section">
-        {GOLD_DATA?.map((g, idx) => (
-          <div className="container mt-5">
-            <div className="row row--relative">
-              <div className="col-12">
-                <div className="company">
-                  <div className="d-flex justify-content-between w-100">
-                    <h6 className="company__title font-xl">
-                      {g?.mainTitle} <span>{g?.buyPoint} </span>
-                    </h6>
-                    <h6 className="company__title font-xl">{g?.mainPrice}</h6>
+      <section className="section ">
+        <div className="container bg-dark">
+          <div className="d-grid p-2">
+            <h5 className="text-white text-center mt-4">Positions Report</h5>
+            {GOLD_DATA?.map((g, idx) => (
+              <>
+              <div className="my-2" key={idx}>
+                <div className="d-flex justify-content-between w-100">
+                  <div className="text-white mb-0 ">
+                    {g?.mainTitle} <span> {g?.buyPoint} </span>
                   </div>
+                  <h6 className="text-white mb-0 ">{g?.mainPrice}</h6>
+                </div>
 
-                  <div className="row w-100 align-items-center">
-                    <p className="company__text">Date: {g?.date}</p>
-                    <div className="col-6 ">
-                      <div className="d-flex justify-content-between w-100">
-                        <div>
-                          <p className="company__text">Open/ SL:</p>
-                          <p className="company__text">Close/ TP:</p>
-                        </div>
-                        <div>
-                          <p className="company__text">77298</p>
-                          <p className="company__text">77520</p>
-                        </div>
+                <div className="row  align-items-center">
+                  <p className="company__text mb-0">Date: {g?.date}</p>
+                  <div className="col-6 ">
+                    <div className="d-flex justify-content-between w-100">
+                      <div>
+                        <p className="company__text mb-0 font-xsm">Open/ SL:</p>
+                        <p className="company__text mb-0 font-xsm">
+                          Close/ TP:
+                        </p>
+                      </div>
+                      <div>
+                        <p className="company__text mb-0 font-xsm">
+                          {g?.openSl}
+                        </p>
+                        <p className="company__text mb-0 font-xsm">
+                          {g?.closeTp}
+                        </p>
                       </div>
                     </div>
-                    {/* offset-xl-1
-                  offset-xl-1 */}
-                    <div className="col-1 ">
-                      <p className="company__text">Comm:</p>
-                      <p className="company__text">Tkt#:</p>
-                    </div>
-                    <div className="col-5 text-end">
-                      <p className="company__text">-3864.90</p>
-                      <p className="company__text">33539220</p>
-                    </div>
                   </div>
-
-                  {/* <!-- design elements --> */}
-                  <span className="block-icon block-icon--orange">
-                    <i className="ti ti-certificate-2"></i>
-                  </span>
-                  <span className="screw screw--lines-bl"></span>
-                  <span className="screw screw--lines-br"></span>
-                  <span className="screw screw--lines-tr"></span>
+                  {/* offset-xl-1
+                  offset-xl-1 */}
+                  <div className="col-1 ">
+                    <p className="company__text mb-0 font-xsm">Comm:</p>
+                    <p className="company__text mb-0 font-xsm">Tkt#:</p>
+                  </div>
+                  <div className="col-5 text-end">
+                    <p className="company__text mb-0 font-xsm">{g?.comm}</p>
+                    <p className="company__text mb-0 font-xsm">{g?.Tkt}</p>
+                  </div>
                 </div>
               </div>
+              <hr className="bg-white line-hr"/>
+              </>
 
-              {/* <!-- animation background --> */}
-              <div
-                className="section__canvas section__canvas--second gradient-background"
-                id="canvas2"
-              ></div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
 
       {/* Reports start */}

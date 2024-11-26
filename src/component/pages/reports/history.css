@@ -1,0 +1,124 @@
+.history-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .news-banner {
+    background-color: #ffeeba;
+    color: #856404;
+    padding: 10px;
+    border: 1px solid #ffeeba;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  
+  .table {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* History Container */
+  .history-container {
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  /* Header */
+  .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* News Banner */
+  .news-banner {
+    background-color: #ffeeba;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Table */
+  .table-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .table-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: #f8f9fa;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+  }
+  
+  .table-row:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .table-row span {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Profit and Loss Styles */
+  .profit {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .loss {
+    color: red;
+    font-weight: bold;
+  }
+  
+  
+  .table-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: #f8f9fa;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  .table-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table-row div {
+    padding: 5px;
+  }
+  
+  .table-row:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  

@@ -4754,7 +4754,10 @@ body::-webkit-scrollbar-thumb {
   border: 1px solid #322e60;
 }
 
-
-.tables-border{
+.tables-border {
   border-collapse: collapse !important;
+}
+
+.line-hr {
+  height: 2px;
 }
